@@ -14,6 +14,14 @@ export const DragComponent = ({ data, sortData, doSth }) => {
         event.preventDefault();
     }
 
+    const drop = (event) => {
+        console.log('drop...');
+        event.preventDefault();
+        const data = event.dataTransfer.getData("Text");
+        const currentTargetId = event.target.id;
+        debugger;
+    }
+
     return (<div className="item-container">
         {
             data.map((d, idx) =>
@@ -23,7 +31,8 @@ export const DragComponent = ({ data, sortData, doSth }) => {
                     draggable={true}
                     onDrag={(e) => drag(e)}
                     onDragStart={e => dragStart(e)}
-                    onDragOver={event => allowDrop(event)}>
+                    onDragOver={event => allowDrop(event)}
+                    onDrop={event => drop(event)}>
                     {d.description}
                 </div>
             )
