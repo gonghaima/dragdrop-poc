@@ -37,6 +37,7 @@
 
 .items:active:hover {
   cursor: grabbing;
+  height: 55px;
 }
 
 .items:nth-child(odd) {

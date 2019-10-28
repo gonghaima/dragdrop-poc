@@ -1,14 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 import { data } from "./mock/data";
+import { DragComponent } from "./dragComponent";
 
 function App() {
+  const [originData, setData] = useState(data);
+  // const letMeKnow = () => alert('good!!!');
+  const letMeKnow = () => console.log('good!!!');
+
   return (
     <div className="App">
-      <div className="item-container">
-        {data.map((d, idx) => <div className="items" key={`item${idx}`}>{d.description}</div>)}
-      </div>
+      <DragComponent data={originData} sortData={setData} doSth={letMeKnow} />
     </div>
   );
 }
