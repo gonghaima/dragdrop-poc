@@ -1,6 +1,6 @@
 
 import React from 'react';
-export const DragComponent = ({ data, sortData, doSth }) => {
+export const DragComponent = ({ data, sortData, swap }) => {
     const drag = (event) => {
         console.log('dragging');
     }
@@ -17,15 +17,15 @@ export const DragComponent = ({ data, sortData, doSth }) => {
     const drop = (event) => {
         console.log('drop...');
         event.preventDefault();
-        const data = event.dataTransfer.getData("Text");
-        const currentTargetId = event.target.id;
-        debugger;
+        const origin = event.dataTransfer.getData("Text");
+        const replacement = event.target.id;
+        swap(origin, replacement);
     }
 
     return (<div className="item-container">
         {
             data.map((d, idx) =>
-                <div id={`item${idx}`}
+                <div id={`${idx}`}
                     className="items"
                     key={`item${idx}`}
                     draggable={true}
