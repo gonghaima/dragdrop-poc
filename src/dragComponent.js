@@ -21,19 +21,6 @@ export const DragComponent = ({ data, sortData, swap }) => {
     }
 
     const dragEnter = event => {
-        // event.target.style.border = "3px dotted red";
-        // event.target.style.height = "20px";
-        // event.target.style.transitionDuration = "400ms";
-        // // event.target.style.transform = "translateY(10px)"
-
-        // const originItemIdx = event.dataTransfer.getData("Text");
-        // console.log(`originItemIdx ${originItemIdx}`);
-        // debugger;
-        // if (event.target.id > originItemIdx) {
-        //     event.target.style.borderTop = "10px solid darkgrey";
-        // } else {
-        //     event.target.style.borderBottom = "10px solid darkgrey";
-        // }
     }
 
     const dragLeave = event => {
@@ -45,17 +32,11 @@ export const DragComponent = ({ data, sortData, swap }) => {
     }
 
     const dragOver = (event) => {
-        // console.log('dragOver triggered');
         event.preventDefault();
 
         //onDragOver
         event.target.style.height = "20px";
         event.target.style.transitionDuration = "400ms";
-        // event.target.style.transform = "translateY(10px)"
-
-        // const originItemIdx = event.dataTransfer.getData("Text");
-        // console.log(`originItemIdx ${originItemIdx}`);
-        // debugger;
 
         if (event.target.id !== idx) {
             console.log(`dragging over, current event.target.id is: ${event.target.id}, current idx is: ${idx}`);
@@ -73,11 +54,9 @@ export const DragComponent = ({ data, sortData, swap }) => {
     }
 
     const drop = (event) => {
-        // console.log('drop...');
         event.preventDefault();
         const origin = event.dataTransfer.getData("Text");
         const replacement = event.target.id;
-        // debugger
         swap(origin, replacement);
         event.target.style.border = "none";
         event.target.style.height = "40px";

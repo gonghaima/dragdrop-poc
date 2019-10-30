@@ -29,6 +29,7 @@
   border-radius: 5px;
   display: flex;
   align-items: center;
+  transition: height 0.5s;
 }
 
 .items:hover {
