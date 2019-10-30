@@ -1,25 +1,90 @@
 
-import React from 'react';
+
+import React, { useState } from 'react';
 export const DragComponent = ({ data, sortData, swap }) => {
+    const [idx, setIdx] = useState(null);
     const drag = (event) => {
         console.log('dragging');
     }
     const dragStart = (event) => {
-        console.log('drag start...');
+        // console.log('drag start...');
         event.dataTransfer.setData("Text", event.target.id);
+        console.log(`event.target.id is used by setIdx: ${event.target.id}`);
+
+        setIdx(event.target.id);
     }
 
-    const allowDrop = (event) => {
-        console.log('allowDrop triggered');
+    const dragEnd = (event) => {
+        event.dataTransfer.setData("Text", null);
+        setIdx(null);
+
+    }
+
+    const dragEnter = event => {
+        // event.target.style.border = "3px dotted red";
+        // event.target.style.height = "20px";
+        // event.target.style.transitionDuration = "400ms";
+        // // event.target.style.transform = "translateY(10px)"
+
+        // const originItemIdx = event.dataTransfer.getData("Text");
+        // console.log(`originItemIdx ${originItemIdx}`);
+        // debugger;
+        // if (event.target.id > originItemIdx) {
+        //     event.target.style.borderTop = "10px solid darkgrey";
+        // } else {
+        //     event.target.style.borderBottom = "10px solid darkgrey";
+        // }
+    }
+
+    const dragLeave = event => {
+        event.target.style.border = "none";
+        event.target.style.height = "40px";
+        event.target.style.padding = "10px";
+        event.target.style.marginButtom = "5px";
+        event.target.style.marginTop = "0px";
+    }
+
+    const dragOver = (event) => {
+        // console.log('dragOver triggered');
         event.preventDefault();
+
+        //onDragOver
+        event.target.style.height = "20px";
+        event.target.style.transitionDuration = "400ms";
+        // event.target.style.transform = "translateY(10px)"
+
+        // const originItemIdx = event.dataTransfer.getData("Text");
+        // console.log(`originItemIdx ${originItemIdx}`);
+        // debugger;
+
+        if (event.target.id !== idx) {
+            console.log(`dragging over, current event.target.id is: ${event.target.id}, current idx is: ${idx}`);
+            if (event.target.id < idx) {
+                event.target.style.borderTop = "10px solid darkgrey";
+                event.target.style.marginTop = "40px";
+            } else {
+                event.target.style.borderBottom = "10px solid darkgrey";
+                // event.target.style.marginBottom = "40px";
+            }
+        } else {
+            event.target.style.marginTop = "0px";
+            event.target.style.marginButtom = "5px";
+        }
     }
 
     const drop = (event) => {
-        console.log('drop...');
+        // console.log('drop...');
         event.preventDefault();
         const origin = event.dataTransfer.getData("Text");
         const replacement = event.target.id;
+        // debugger
         swap(origin, replacement);
+        event.target.style.border = "none";
+        event.target.style.height = "40px";
+        event.target.style.padding = "10px";
+        event.target.style.marginButtom = "5px";
+        event.target.style.marginTop = "0px";
+        setIdx(null);
     }
 
     return (<div className="item-container">
@@ -31,7 +96,11 @@ export const DragComponent = ({ data, sortData, swap }) => {
                     draggable={true}
                     onDrag={(e) => drag(e)}
                     onDragStart={e => dragStart(e)}
-                    onDragOver={event => allowDrop(event)}
+                    onDragEnd={e => dragEnd(e)}
+
+                    onDragEnter={event => dragEnter(event)}
+                    onDragOver={event => dragOver(event)}
+                    onDragLeave={event => dragLeave(event)}
                     onDrop={event => drop(event)}>
                     {d.description}
                 </div>

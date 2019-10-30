@@ -43,3 +43,7 @@
 .items:nth-child(odd) {
   background: lightgreen;
 }
+
+.hover-enter {
+  height: 25px;
+}
