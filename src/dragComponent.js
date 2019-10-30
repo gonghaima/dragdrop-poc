@@ -40,7 +40,7 @@ export const DragComponent = ({ data, sortData, swap }) => {
         event.target.style.border = "none";
         event.target.style.height = "40px";
         event.target.style.padding = "10px";
-        event.target.style.marginButtom = "5px";
+        event.target.style.marginButtom = "20px";
         event.target.style.marginTop = "0px";
     }
 
@@ -61,14 +61,14 @@ export const DragComponent = ({ data, sortData, swap }) => {
             console.log(`dragging over, current event.target.id is: ${event.target.id}, current idx is: ${idx}`);
             if (event.target.id < idx) {
                 event.target.style.borderTop = "10px solid darkgrey";
-                event.target.style.marginTop = "40px";
+                event.target.style.marginTop = "20px";
             } else {
                 event.target.style.borderBottom = "10px solid darkgrey";
-                // event.target.style.marginBottom = "40px";
+                event.target.style.marginBottom = "20px";
             }
         } else {
             event.target.style.marginTop = "0px";
-            event.target.style.marginButtom = "5px";
+            event.target.style.marginButtom = "20px";
         }
     }
 
@@ -82,7 +82,7 @@ export const DragComponent = ({ data, sortData, swap }) => {
         event.target.style.border = "none";
         event.target.style.height = "40px";
         event.target.style.padding = "10px";
-        event.target.style.marginButtom = "5px";
+        event.target.style.marginButtom = "20px";
         event.target.style.marginTop = "0px";
         setIdx(null);
     }
